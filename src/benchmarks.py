@@ -1,7 +1,6 @@
 from os.path import join as j
 
-from pwhash import pwhash
-from phash import phash
+from hashes import phash, pwhash
 
 if __name__ == '__main__':
     for hash_function in [phash, pwhash]:
