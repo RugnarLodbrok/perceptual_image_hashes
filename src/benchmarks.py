@@ -1,9 +1,9 @@
 from os.path import join as j
 
-from hashes import phash, pwhash
+from hashes import avghash, phash, pwhash
 
 if __name__ == '__main__':
-    for hash_function in [phash, pwhash]:
+    for hash_function in [avghash, phash, pwhash]:
         d = {}
         for p in ['github_logo1.PNG', 'github_logo2.PNG', 'github_logo3.PNG']:
             ph = hash_function(j('..', 'data', p))

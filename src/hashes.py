@@ -6,6 +6,12 @@ from scipy.fftpack import dct, idct
 from common import bit_array_to_int
 
 
+def avghash(path):
+    im = Image.open(path)
+    a = np.asanyarray(im.resize((8, 8), Image.ANTIALIAS).convert('L'))
+    return bit_array_to_int((a > np.average(a)).reshape([64]))
+
+
 def dct2d(x):
     return dct(dct(x.T, norm='ortho').T, norm='ortho')
 
@@ -22,8 +28,6 @@ def phash(path, mode=1):  # mode==1 is the best so far
     a = a - np.average(a)
     ff = dct2d(a)
 
-    # ff[8:, :] = 0
-    # ff[:, 8:] = 0
     ff = ff[:8, :8]
     if mode & int('01', base=2):
         ff **= 2
